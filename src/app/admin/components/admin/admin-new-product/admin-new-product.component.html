@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="category border m-2 p-4 rounded">
+        <h1 class="display-6">New Category</h1>
+        <hr>
+        <form #categoryForm action="javascript:void(0);" class="col-lg-8" (submit)='saveCategory(categoryForm)' method="POST">
+            <div class="form-group m-3">
+                <label for="title">Category Title</label>
+                <input id="title" class="form-control" type="text" name="title">
+            </div>
+
+            <div class="m-3">
+                <input type="submit" class="btn btn-outline-primary col-lg-3" value="Save Category">
+            </div>
+        </form>
+    </div>
+
+    <div class="category border m-2 p-4 rounded">
+        <h1 class="display-6">New Product</h1>
+        <hr>
+        <form #productForm action="javascript:void(0);" class="col-lg-8" (submit)='saveProduct(productForm)' method="POST">
+            <div class="form-group m-3">
+                <label for="title">Product Name</label>
+                <input id="title" class="form-control" type="text" name="name">
+            </div>
+            <div class="form-group m-3">
+                <label for="price">Price</label>
+                <input id="price" class="form-control" type="number" name="price">
+            </div>
+
+            <div class="form-group m-3">
+                <label for="category">Category</label>
+                <select name="category" class="form-control" id="category">
+                    <option *ngFor='let cat of categories' value="{{cat._id}}">{{cat.name}}</option>
+                </select>
+            </div>
+
+            <div class="custom-file  m-3">
+                <input id="file" class="custom-file-input" type="file" name="productImage">
+                <label for="file" class="custom-file-label">Select Image</label>
+            </div>
+
+            <div class="m-3">
+                <input type="submit" class="btn btn-outline-primary col-lg-3" value="Save Product">
+            </div>
+        </form>
+    </div>
+</div>

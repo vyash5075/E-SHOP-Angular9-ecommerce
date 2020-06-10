@@ -1,0 +1,56 @@
+<div class="container-fluid p-3">
+    <h1 class="display-6">Products</h1>
+    <hr>
+
+    <div class="p-1">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let product of products;index as i' (click)='openModal(formModal , product )'>
+                    <td>{{i+1}}</td>
+                    <td><img src="/api/{{product.productImage}}" alt="" srcset="" height="100px" class="rounded-circle"></td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.category.name}}</td>
+                    <td>₹ {{product.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+<ng-template #formModal>
+    <form #productForm action="javascript:void(0);" class="p-4 m-3 border rounded" (submit)='updateProduct(productForm)' method="POST">
+        <h1 class="display-6">Update Product</h1>
+        <hr>
+        <div class="form-group m-3">
+            <label for="title">Product Name</label>
+            <input id="title" class="form-control" value='{{selectedProduct.name}}' type="text" name="name">
+        </div>
+        <div class="form-group m-3">
+            <label for="price">Price</label>
+            <input id="price" class="form-control" value='{{selectedProduct.price}}' type="number" name="price">
+        </div>
+
+        <div class="form-group m-3">
+            <label for="category">Category</label>
+            <select name="category" class="form-control" id="category">
+                <option *ngFor='let cat of categories' [selected]='selectedProduct.category._id == cat._id' value="{{cat._id}}">{{cat.name}}</option>
+            </select>
+        </div>
+
+        <div class="m-3">
+            <input type="submit" class="btn btn-outline-primary col-md-4" value="Update Product">
+        </div>
+    </form>
+</ng-template>

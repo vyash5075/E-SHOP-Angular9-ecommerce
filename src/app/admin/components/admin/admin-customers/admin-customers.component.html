@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <h1 class="display-6">Customers</h1>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sno.</th>
+                <th>Customer Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>User Type</th>
+                <th>Registered Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor='let user of (users$|async) ; index as i'>
+                <td>{{i+1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.userType}}</td>
+                <td>{{user.created_at | date}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

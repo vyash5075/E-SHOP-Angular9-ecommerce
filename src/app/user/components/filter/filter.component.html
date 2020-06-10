@@ -1,0 +1,39 @@
+<div>
+    <div>
+        <h6>Category</h6>
+        <hr>
+        <div class="custom-control custom-radio m-2">
+            <input type="radio" value="" id="a" name="category" class="custom-control-input">
+            <label (click)='categorySelected("")' class="custom-control-label" for="a">All</label>
+        </div>
+        <div *ngFor='let category of categories;index as i ' class="custom-control custom-radio m-2">
+            <input type="radio" value="{{category._id}}" id="a{{i}}" name="category" class="custom-control-input">
+            <label (click)='categorySelected(category._id)' class="custom-control-label" for="a{{i}}">{{category.name}}</label>
+        </div>
+
+    </div>
+
+
+    <div>
+        <h6>Price</h6>
+        <hr>
+
+        <select #minPrice name="min" (change)='setMaxvalue(minPrice.value)' class="form-control mb-2" id="">
+            <option value="min">Min Price</option>
+            <option *ngFor='let m of min' value="{{m}}">{{m}}</option>
+        </select>
+        <select #maxPrice name='max' class="form-control mb-2" id="">
+            <option value="max">Max Price</option>
+            <option *ngFor='let m of max' value="{{m}}">{{m}}</option>
+        </select>
+
+        <div class="mb-2">
+            <button (click)='filter(minPrice.value , maxPrice.value)' class=" btn-block   btn btn-sm btn-light border rounded">Filter</button>
+        </div>
+        <div class="mb-2">
+            <button routerLink='' class=" btn-block   btn btn-sm btn-light border rounded">Reset</button>
+        </div>
+
+    </div>
+
+</div>

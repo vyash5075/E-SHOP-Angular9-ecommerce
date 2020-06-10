@@ -1,0 +1,57 @@
+<div class="">
+    <div class="border rounded p-3">
+        <h1 class="display-7">Last 30 Days Summary</h1>
+        <hr>
+        <div class="row mx-auto p-3">
+            <div class="col">
+                <admin-dashboard-card [color]='colors.a' [value]='users30'>Customers</admin-dashboard-card>
+            </div>
+            <div class="col">
+                <admin-dashboard-card [color]='colors.b' [value]='orders30'>Order</admin-dashboard-card>
+            </div>
+            <div class="col">
+                <admin-dashboard-card [color]='colors.c' [value]='sales30'>Sale</admin-dashboard-card>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="border rounded p-3">
+        <h1 class="display-7">Over All</h1>
+        <hr>
+        <div class="row mx-auto p-3">
+            <div class="col">
+                <admin-dashboard-card [color]='colors.b' [value]='totalProducts'>Product</admin-dashboard-card>
+            </div>
+            <div class="col">
+                <admin-dashboard-card [color]='colors.c' [value]='ordersTotal'>Orders</admin-dashboard-card>
+            </div>
+            <div class="col">
+                <admin-dashboard-card [color]='colors.a' [value]='usersTotal'>Customers</admin-dashboard-card>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="border rounded p-3 mt-2">
+        <span class='row float-right'>
+            <button class="btn btn-light border m-2" (click)='changeChart("line")'>Line Chart</button>
+            <button class="btn btn-light border m-2" (click)='changeChart("bar")'>Bar Chart</button>
+        </span>
+        <div>
+            <div>
+                <div style="display: block">
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+                </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
