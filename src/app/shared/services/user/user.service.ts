@@ -1,99 +1,85 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
-import {map} from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  private getAllUsersUrl = 'https://eshopangular.herokuapp.com/api/users';
+  private userSignupUrl = 'https://eshopangular.herokuapp.com/api/users/signup';
+  private userLoginUrl = 'https://eshopangular.herokuapp.com/api/users/login';
+  private isAdminUrl = 'https://eshopangular.herokuapp.com/api/users/is-admin';
+  private _loginObservable: BehaviorSubject<Object>;
 
-
-
-  private getAllUsersUrl = "/api/users";
-  private userSignupUrl = "/api/users/signup";
-  private userLoginUrl = "/api/users/login";
-  private isAdminUrl = "/api/users/is-admin";
-  private _loginObservable : BehaviorSubject<Object>;
-  
-  constructor(private http : HttpClient) { 
+  constructor(private http: HttpClient) {
     this._loginObservable = new BehaviorSubject({});
   }
 
-  
   public get loginObservable() {
-    return this._loginObservable
-  }
-  
-
-
-
-  private saveTokenToLocalStorage(token : string){
-    localStorage.setItem('token' , "Bearer "+ token)
+    return this._loginObservable;
   }
 
-  logout(){
-    localStorage.removeItem('token')
-    this._loginObservable.next({})
+  private saveTokenToLocalStorage(token: string) {
+    localStorage.setItem('token', 'Bearer ' + token);
   }
 
-  getToken(){
-    return localStorage.getItem('token') ? localStorage.getItem('token') : "";
+  logout() {
+    localStorage.removeItem('token');
+    this._loginObservable.next({});
   }
 
-  isLoggedIn(){
-    if(this.getToken() != ''){
+  getToken() {
+    return localStorage.getItem('token') ? localStorage.getItem('token') : '';
+  }
+
+  isLoggedIn() {
+    if (this.getToken() != '') {
       return true;
     }
 
-    return false
+    return false;
   }
 
-
-  isAdmin(){
-   
+  isAdmin() {
     return this.http.get(this.isAdminUrl).pipe(
-      map(result=>{
-        return <boolean>result
+      map((result) => {
+        return <boolean>result;
       })
-    )
+    );
   }
 
-  signup(user : User){
-     return this.http.post(this.userSignupUrl , user)
-     .pipe(
-       map(result=>{
-          return <{message : string}>result
-       })
-     )
+  signup(user: User) {
+    return this.http.post(this.userSignupUrl, user).pipe(
+      map((result) => {
+        return <{ message: string }>result;
+      })
+    );
   }
 
- // get All 
-  getAll(){
-  
-    return this.http.get(this.getAllUsersUrl)
-    .pipe(
-      map((result : {users : User[]})=>{
-         return result.users
+  // get All
+  getAll() {
+    return this.http.get(this.getAllUsersUrl).pipe(
+      map((result: { users: User[] }) => {
+        return result.users;
       })
-    )
- }
+    );
+  }
 
-  login(credentials : {email : string , password : string}){
-     return this.http.post(this.userLoginUrl , credentials)
-     .pipe(
-       map((result : loginResponce)=>{
-         this.saveTokenToLocalStorage(result.token)
-         this._loginObservable.next({});
-         return result
-       })
-     )
+  login(credentials: { email: string; password: string }) {
+    return this.http.post(this.userLoginUrl, credentials).pipe(
+      map((result: loginResponce) => {
+        this.saveTokenToLocalStorage(result.token);
+        this._loginObservable.next({});
+        return result;
+      })
+    );
   }
 }
 
-
-interface loginResponce{
-  token : string , 
-  message : string
+interface loginResponce {
+  token: string;
+  message: string;
 }
