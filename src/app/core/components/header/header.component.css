@@ -1,11 +1,11 @@
-.b {
-  /* background-color:rgb(241, 76, 76) */
+nav {
+  background-color:rgb(241, 76, 76) ;
   background: #ee0979; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
     #ff6a00,
     #ee0979
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to right,
     #ff6a00,
@@ -13,9 +13,9 @@
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-/* img{
+img{
     height:60px;
-} */
+}
 /* h3{
     padding-top: 10px;
     padding-right: 12px;
@@ -32,7 +32,7 @@ body {
   font-family: montserrat;
 }
 nav {
-  background: #0082e6;
+  /* background: #0082e6; */
   height: 80px;
   width: 100%;
 }
